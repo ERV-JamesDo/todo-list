@@ -27,7 +27,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "works")
 @EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = { "statingDate",
+@JsonIgnoreProperties(value = { "startingDate",
 "endingDate" }, allowGetters = true)
 public class Work {
     @Id
@@ -43,7 +43,7 @@ public class Work {
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
-    private Date statingDate;
+    private Date startingDate;
 
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -75,11 +75,11 @@ public class Work {
     }
 
     public Date getStartingDate() {
-        return statingDate;
+        return startingDate;
     }
 
     public void setStartingDate(Date startingDate) {
-        this.statingDate = startingDate;
+        this.startingDate = startingDate;
     }
 
     public Date getEndingDate() {
