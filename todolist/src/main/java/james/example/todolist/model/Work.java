@@ -19,6 +19,10 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import james.example.todolist.enums.STATUS;
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * 
  * @author james-do
@@ -32,62 +36,48 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Work {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
+    @Setter
     private Long workId;
 
     @NotBlank
+    @Getter
+    @Setter
     private String workName;
 
     @NotBlank
+    @Getter
+    @Setter
     private String status;
 
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
+    @Getter
+    @Setter
     private Date startingDate;
 
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
+    @Getter
+    @Setter
     private Date endingDate;
 
-    public Long getId() {
-        return workId;
+    public Work() {
+
     }
 
-    public void setId(Long id) {
-        this.workId = id;
-    }
-
-    public String getWorkName() {
-        return workName;
-    }
-
-    public void setWorkName(String name) {
-        this.workName = name;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Date getStartingDate() {
-        return startingDate;
-    }
-
-    public void setStartingDate(Date startingDate) {
+    public Work(String workName, Date startingDate) {
+        this.workName = workName;
         this.startingDate = startingDate;
+        this.status = STATUS.PLANNING.getValue();
     }
 
-    public Date getEndingDate() {
-        return endingDate;
-    }
-
-    public void setEndingDate(Date endingDate) {
+    public Work(String workName, Date startingDate, Date endingDate, STATUS status) {
+        this.workName = workName;
+        this.startingDate = startingDate;
         this.endingDate = endingDate;
+        this.status = status.getValue();
     }
-
 }
